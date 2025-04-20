@@ -1,3 +1,5 @@
+// This is the main entry point for the CRM System application.
+//Default file 
 using Microsoft.EntityFrameworkCore;
 using CRMSystem.Data;
 using CRMSystem.Models;
@@ -5,14 +7,17 @@ using CRMSystem.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
+// Configure Entity Framework Core with SQLite database
+
 builder.Services.AddDbContext<CRMContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))); // Use SQLite
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))); // Using SQLite here 
 
-builder.Services.AddControllers();  // Add API controllers (without Views)
+builder.Services.AddControllers();  // Add API controllers (without Views) since frontend is done o react
 
-var app = builder.Build();
+var app = builder.Build(); //Build the application
 
 // Seed the database with dummy data (only in development)
+//Dummy data seeding for development purposes
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -31,8 +36,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.UseHttpsRedirection();  // Optional: Enable HTTPS Redirection
-
+app.UseHttpsRedirection();  //  Redirect HTTP requests to HTTPS , this is optional
 // Map API controllers to routes
 app.MapControllers();
 
