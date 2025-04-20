@@ -6,38 +6,31 @@ using CRMSystem.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-// Configure Entity Framework Core with SQLite database
-
-builder.Services.AddDbContext<CRMContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))); // Using SQLite here 
-
-builder.Services.AddControllers();  // Add API controllers (without Views) since frontend is done o react
-
-var app = builder.Build(); //Build the application
-
-// Seed the database with dummy data (only in development)
-//Dummy data seeding for development purposes
-using (var scope = app.Services.CreateScope())
+// Step 1: Add CORS services to allow cross-origin requests from React
+builder.Services.AddCors(options =>
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<CRMContext>();
-
-    // Seed dummy data if no data exists
-    if (!context.Customers.Any())
+    options.AddPolicy("AllowAll", policy =>
     {
-        context.Customers.AddRange(
-            new Customer { Name = "John Doe", Email = "john.doe@example.com", PhoneNumber = "123-456-7890" },
-            new Customer { Name = "Jane Smith", Email = "jane.smith@example.com", PhoneNumber = "987-654-3210" },
-            new Customer { Name = "Sam Brown", Email = "sam.brown@example.com", PhoneNumber = "555-123-4567" }
-        );
+        policy.AllowAnyOrigin()   // Allows any origin (like localhost:3000)
+              .AllowAnyMethod()   // Allows all HTTP methods (GET, POST, etc.)
+              .AllowAnyHeader();  // Allows all headers
+    });
+});
 
-        context.SaveChanges();  // Save changes to the database
-    }
-}
+// Step 2: Add DbContext, Controllers, etc.
+builder.Services.AddDbContext<CRMContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));  // Use SQLite
 
-app.UseHttpsRedirection();  //  Redirect HTTP requests to HTTPS , this is optional
-// Map API controllers to routes
-app.MapControllers();
+builder.Services.AddControllers();  // Add API controllers (without Views)
 
-app.Run();  // Run the application
+// Step 3: Build the app
+var app = builder.Build();
+
+// Step 4: Enable CORS middleware (before mapping controllers)
+app.UseCors("AllowAll");  // Apply the "AllowAll" policy to all requests
+
+// Step 5: Map API controllers to routes
+app.MapControllers();  // Map API controllers (for CRUD operations)
+
+// Step 6: Run the app
+app.Run();

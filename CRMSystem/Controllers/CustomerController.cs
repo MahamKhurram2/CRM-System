@@ -41,31 +41,51 @@ namespace CRMSystem.Controllers
 
         // POST: api/customer
         // This method creates a new customer in the database
-        [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
-        {
-            _context.Customers.Add(customer); //add the new customer to the context
-            await _context.SaveChangesAsync();// save chnages
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer); //return the newly created customer
-        }
+       [HttpPost]
+public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+{
+    _context.Customers.Add(customer); //add the customer to the context
+    await _context.SaveChangesAsync();//save changes to the database
+    return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);//return the created customer with a 201 status code
+}
+
 
         // PUT: api/customer/{id}
         // This method updates an existing customer in the database
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer customer)
-        {
-            if (id != customer.Id)// //check if the id of the customer matches the id in the url
-            {
-                return BadRequest(); //return bad request if they do not match
-            }
-            {
-                return BadRequest();
-            }
+public async Task<IActionResult> PutCustomer(int id, Customer customer)
+{
+    // Check if the customer id matches the provided id in the URL
+    if (id != customer.Id)
+    {
+        return BadRequest();  // Return BadRequest if IDs don't match
+    }
 
-            _context.Entry(customer).State = EntityState.Modified; //update the state of the customer to modified
-            await _context.SaveChangesAsync(); //save changes to the database
-            return NoContent();//return no content if successful i.e return 204
+    // Mark the entity state as modified
+    _context.Entry(customer).State = EntityState.Modified;
+
+    try
+    {
+        // Attempt to save changes to the database
+        await _context.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        // Handle any potential issues when saving to the database
+        if (!_context.Customers.Any(c => c.Id == id))
+        {
+            return NotFound();  // Return NotFound if the customer doesn't exist
         }
+        else
+        {
+            throw;
+        }
+    }
+
+    // Return NoContent on success
+    return NoContent();
+}
+
 
         // DELETE: api/customer/{id}
         // This method deletes a specific customer by ID from the database

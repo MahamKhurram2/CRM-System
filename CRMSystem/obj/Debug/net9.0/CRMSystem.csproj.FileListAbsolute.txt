@@ -187,3 +187,4 @@ C:\Users\hp\OneDrive\Desktop\crm-system\CRMSystem\obj\Debug\net9.0\refint\CRMSys
 C:\Users\hp\OneDrive\Desktop\crm-system\CRMSystem\obj\Debug\net9.0\CRMSystem.pdb
 C:\Users\hp\OneDrive\Desktop\crm-system\CRMSystem\obj\Debug\net9.0\CRMSystem.genruntimeconfig.cache
 C:\Users\hp\OneDrive\Desktop\crm-system\CRMSystem\obj\Debug\net9.0\ref\CRMSystem.dll
+C:\Users\hp\OneDrive\Desktop\crm-system\CRMSystem\obj\Debug\net9.0\CRMSystem.sourcelink.json
