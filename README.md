@@ -8,7 +8,7 @@ This project is a Customer Relationship Management (CRM) System built using **AS
 - [Frontend (React)](#frontend-react)
 - [Backend (ASP.NET Core)](#backend-aspnet-core)
 - [How to Run](#how-to-run)
-- [Running the Application](#running-the-application)
+
 - [Demo Screenshots](#demo-screenshots)
 - [License](#license)
 - [Author](#author)
@@ -90,7 +90,7 @@ The backend of this project is built using **ASP.NET Core**. It provides a RESTf
    ```
    The frontend will be running at [http://localhost:3000](http://localhost:3000).
    
-   -Note: Open two terminals Simulatneously. First run bacend , then run frontend.
+   -Note: Open two terminals simultaneously. First run backend, then run frontend.
 
 ### Additional Steps:
 - Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the application.
