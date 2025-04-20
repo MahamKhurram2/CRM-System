@@ -100,25 +100,25 @@ The backend of this project is built using **ASP.NET Core**. It provides a RESTf
 ## Demo Screenshots
 
 1. **Welcome Page**  
-   ![Welcome Page](./screenshots/welcomepage.png)
+   ![Welcome Page](./screenshots/welcomepage.PNG)
 
 2. **Customer List Page**  
-   ![Customer List Page](./screenshots/customerlist.png)
+   ![Customer List Page](./screenshots/customerlist.PNG)
 
 3. **Add Customer Form**  
-   ![Add Customer Form](./screenshots/add.png)
+   ![Add Customer Form](./screenshots/add.PNG)
 
 4. **Edit Customer Form**  
-   ![Edit Customer Form](./screenshots/edit.png)
-   ![Edit Customer Form2](./screenshots/edit1.png)
+   ![Edit Customer Form](./screenshots/edit.PNG)
+   ![Edit Customer Form2](./screenshots/edit1.PNG)
 
 
 5. **Popup Success Message**  
-   ![Popup Success Message](./screenshots/popup.png)
+   ![Popup Success Message](./screenshots/popup.PNG)
 
 6. **Delete Customer**  
-   ![Delet Forrm](./screenshots/delete.png)
-   ![Delet Form1](./screenshots/delete1.png)
+   ![Delet Forrm](./screenshots/delete.PNG)
+      ![Delet Form1](./screenshots/delete1.PNG)
 7. **Backend Route Example**  
       ![Backend Route](./screenshots/backendroute.PNG)
       
